@@ -1,4 +1,5 @@
 import React from 'react';
+import { resourceLimits } from 'worker_threads';
 import { apiCall } from './util';
 
 export class Map extends React.Component{
@@ -13,8 +14,12 @@ export class Map extends React.Component{
         )
     }
 
-    sortData() {
-        const rawData = apiCall();
-        console.log(rawData);
+    async sortData() {
+        try{
+            const result = await apiCall();
+            return result;
+        } catch(e){
+            console.log(e);
+        }
     }
 }
