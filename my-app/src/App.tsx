@@ -1,7 +1,5 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import { apiCall } from './util';
 import {Map} from './map';
 
 function App() {
