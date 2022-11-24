@@ -1,9 +1,8 @@
 import React from 'react';
 import './map.css';
-import {observable, action } from 'mobx';
 import {observer} from 'mobx-react';
 import { MapContainer, TileLayer, useMap, Marker, Popup } from 'react-leaflet'
-import { apiCall, NetworkStationType } from './util';
+import { NetworkStationType } from './util';
 
 interface MapProps {
     closestList: NetworkStationType[],
@@ -20,10 +19,7 @@ export class Map extends React.Component<MapProps, MapState>{
     
     render(): React.ReactNode {
 
-        // this.getClosestLocations(-0.084605692, 51.521283);
         const {latitude, longitude} = this.props.currentLocation;
-
-        console.log('lat: ', latitude, " long: ", longitude);
 
         return (
             <div>
@@ -59,23 +55,6 @@ export class Map extends React.Component<MapProps, MapState>{
                 </Marker>
             </React.Fragment>
             )
-    })
-    }
-
-    async getClosestLocations(longitude: number, latitude: number) {
-        var result;
-        try{
-            result = await apiCall();
-
-        } catch(e){
-            console.log(e);
-        }
-
-        // eslint-disable-next-line
-        result?.stations.map((station) => {
-            // console.log('station: ', station);
-
         })
-        //return a list of the stations indexes
     }
 }

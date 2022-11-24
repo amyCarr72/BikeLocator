@@ -1,4 +1,6 @@
-export function apiCall() {
+import * as L from 'leaflet';
+
+function apiCall() {
     return new Promise<BikeNetworkType> ((resolve, reject) => {
         $.ajax({
             url: 'http://api.citybik.es/v2/networks/santander-cycles',
@@ -11,6 +13,28 @@ export function apiCall() {
             }
         })
     })
+}
+
+export async function getClosestLocations(currentLocation: {latitude: number, longitude: number}) {
+    const {latitude, longitude} = currentLocation;
+    var result;
+    try{
+        result = await apiCall();
+
+    } catch(e){
+        console.log(e);
+    }
+    var fromLatLng = L.latLng(latitude, longitude);
+    // eslint-disable-next-line
+    result?.stations.map((station) => {
+
+        var toLatLng = L.latLng(station.latitude, station.longitude);
+        let distance = fromLatLng.distanceTo(toLatLng)/ 1000;
+        
+        //sort a list based on distance, hold onto the indexOf the smallest distances
+    })
+    //return a list of the stations indexes
+    return result 
 }
 
 export interface BikeNetworkType {

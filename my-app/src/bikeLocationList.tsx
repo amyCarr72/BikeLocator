@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { apiCall, NetworkStationType } from './util';
+import { NetworkStationType } from './util';
 
 export interface ListProps {
     closestStations: NetworkStationType[]
@@ -7,26 +7,15 @@ export interface ListProps {
 }
 
 export class List extends React.Component<ListProps>{
+    
     render() {
+        const {closestStations, currentLocation} = this.props;
+        const {latitude, longitude} = currentLocation;
+
+        // const closeStat = this.getClosestLocations(currentLocation);
+
         return (
             <div>This is the list</div>
         )
-    }
-
-    async getClosestLocations(longitude: number, latitude: number) {
-        var result;
-        try{
-            result = await apiCall();
-
-        } catch(e){
-            console.log(e);
-        }
-
-        // eslint-disable-next-line
-        result?.stations.map((station) => {
-            // console.log('station: ', station);
-
-        })
-        //return a list of the stations indexes
     }
 }

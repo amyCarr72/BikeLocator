@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import{Map} from './map'
-import { NetworkStationType } from './util';
+import { NetworkStationType, getClosestLocations } from './util';
 import { List } from './bikeLocationList'
 import { LocationInput } from './inputForm';
 
@@ -51,6 +51,10 @@ export default class App extends React.Component <{}, AppState>{
     this.setState({
       currentLocation: {latitude, longitude}
     });
+
+    console.log('currentLocation: ', this.state.currentLocation);
+
+    getClosestLocations(this.state.currentLocation);
 
   }
   
