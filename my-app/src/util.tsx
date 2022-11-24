@@ -1,18 +1,3 @@
-// export async function apiCall(): Promise<BikeNetworkType>{
-//     return new Promise(function(resolve, reject) { 
-//         $.ajax({
-//             url: 'http://api.citybik.es/v2/networks/santander-cycles',
-//             type: 'GET',
-//             success: function (data) {
-//                 resolve(data);
-//             },
-//             error: function (error) {
-//                 reject(error);
-//             }
-//         })
-//     })
-// }
-
 export function apiCall() {
     return new Promise<BikeNetworkType> ((resolve, reject) => {
         $.ajax({
@@ -57,7 +42,7 @@ export interface NetworkStationType {
 }
 
 interface StationExtraDetailsType {
-    installDate: number,
+    installDate: string,
     installed: boolean,
     locked: boolean,
     name: string,
@@ -66,3 +51,60 @@ interface StationExtraDetailsType {
     terminalName: string,
     uid: number
 }
+
+// export class BikeLocationStore {
+
+//     @observable
+//     closestStations: NetworkStationType[];
+
+//     @observable
+//     currentLocation: {latitude: number, longitude: number};
+
+//     @action
+//     setClosestStations(closestStations: NetworkStationType[]){
+//         this.closestStations = closestStations;
+//     }
+
+//     @action
+//     setCurrentLocation(latitude: number, longitude: number){
+//         this.currentLocation = {latitude, longitude};
+//     }
+
+//     constructor(){
+
+//     }
+
+
+//     apiCall() {
+//         return new Promise<BikeNetworkType> ((resolve, reject) => {
+//             $.ajax({
+//                 url: 'http://api.citybik.es/v2/networks/santander-cycles',
+//                 type: 'GET',
+//                 success: function (data) {
+//                     resolve(data.network);
+//                 },
+//                 error: function(error) {
+//                     reject(error);
+//                 }
+//             })
+//         })
+//     }
+
+//     async getClosestLocations(longitude: number, latitude: number) {
+//         var result;
+//         try{
+//             result = await this.apiCall();
+
+//         } catch(e){
+//             console.log(e);
+//         }
+
+//         // eslint-disable-next-line
+//         result?.stations.map((station) => {
+//             console.log('station: ', station);
+
+//         })
+//         //return a list of the stations indexes
+//     }
+
+// }
