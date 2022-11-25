@@ -48,7 +48,7 @@ export class Map extends React.Component<MapProps, MapState>{
                 <React.Fragment key={i}>
                     <Marker position={[location.latitude, location.longitude]}>
                         <Popup>
-                            {location.name}
+                            {location.extra.name}
                         </Popup>
                     </Marker>
                 </React.Fragment>

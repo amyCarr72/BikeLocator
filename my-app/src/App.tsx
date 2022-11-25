@@ -25,11 +25,11 @@ export default class App extends React.Component <{}, AppState>{
         <form className='BikeLocator-locationInput' onSubmit={(event) => this.handleSubmit(event)}>
             <label className='locationLabel latitudeLabel'>
               Latitude:
-              <input className="locationInput latitudeInput" type="text" name="latitude" />
+              <input className="locationInput latitudeInput" type="text" name="latitude" defaultValue={this.state.currentLocation.latitude}/>
             </label>
             <label className='locationLabel longitudeLabel'>
               Longitude:
-              <input className="locationInput longitudeInput" type="text" name="longitude" />
+              <input className="locationInput longitudeInput" type="text" name="longitude" defaultValue={this.state.currentLocation.longitude}/>
             </label>
             <label className='locationLabel freeBikesLabel'>
               Number of bikes required: 
