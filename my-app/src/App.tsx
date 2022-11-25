@@ -3,7 +3,6 @@ import './App.css';
 import{Map} from './map'
 import { NetworkStationType, getClosestLocations } from './util';
 import { List } from './bikeLocationList'
-import { LocationInput } from './inputForm';
 
 interface AppState {
   currentLocation: {latitude :number, longitude: number},
@@ -34,7 +33,7 @@ export default class App extends React.Component <{}, AppState>{
             </label>
             <label className='locationLabel freeBikesLabel'>
               Number of bikes required: 
-              <input className="locationInput freeBikesInput" type='number' name="freeBikes" />
+              <input className="locationInput freeBikesInput" type='number' name="freeBikes" defaultValue={1} />
             </label>
             <input className='locationSubmit' type="submit" value="Submit" />
         </form>
@@ -68,8 +67,5 @@ export default class App extends React.Component <{}, AppState>{
       this.setState({
       closestStations: closestStationsResult
     })});
-
   }
-
-  
 }

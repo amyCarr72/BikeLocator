@@ -10,10 +10,6 @@ export interface ListProps {
 export class List extends React.Component<ListProps>{
     
     render() {
-        const {closestStations, currentLocation} = this.props;
-        const {latitude, longitude} = currentLocation;
-
-        // const closeStat = this.getClosestLocations(currentLocation);
 
         return (
             <div className='BikeLocator-stationsList'>
