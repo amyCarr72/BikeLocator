@@ -1,4 +1,5 @@
 import * as React from 'react';
+import './bikeLocationList.css'
 import { NetworkStationType } from './util';
 
 export interface ListProps {
@@ -17,9 +18,7 @@ export class List extends React.Component<ListProps>{
         return (
             <div className='BikeLocator-stationsList'>
                 <div className='BikeLocator-listHeader'>Closest Stations: </div>
-                <ul>
-                    {this.drawListItems()}
-                </ul>
+                {this.drawListItems()}
             </div>
         )
     }
@@ -31,9 +30,9 @@ export class List extends React.Component<ListProps>{
             return (
                 <React.Fragment key={i}>
                     <div className='BikeLocator-stationListItem'>
-                        <li><b>{station.extra.name}</b> <br />
+                        <span><b>{station.extra.name}</b> <br />
                             Bikes available: {station.free_bikes}
-                        </li>
+                        </span>
                     </div>
                 </React.Fragment>
             )

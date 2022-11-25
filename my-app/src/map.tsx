@@ -22,8 +22,8 @@ export class Map extends React.Component<MapProps, MapState>{
         const {latitude, longitude} = this.props.currentLocation;
 
         return (
-            <div>
-                <MapContainer center={[latitude, longitude]} zoom={13} scrollWheelZoom={false}>
+            <div className='BikeLocator-map'>
+                <MapContainer center={[latitude, longitude]} zoom={15} scrollWheelZoom={true}>
                     <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -34,7 +34,7 @@ export class Map extends React.Component<MapProps, MapState>{
                             {latitude} {longitude}
                         </Popup>
                     </Marker>
-                    {this.drawPopups()}
+                        {this.drawPopups()}
                 </MapContainer>
           </div>
         )
@@ -44,8 +44,6 @@ export class Map extends React.Component<MapProps, MapState>{
         const {closestList} = this.props;
 
         return closestList.map((location, i) => {
-            // console.log('location: ', location.name);
-            // console.log('i: ', i);
             return (
                 <React.Fragment key={i}>
                     <Marker position={[location.latitude, location.longitude]}>

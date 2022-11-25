@@ -1,0 +1,14 @@
+.BikeLocator-stationsList{
+    margin: 8px 25px 8px 8px;
+    color: white;
+}
+
+.BikeLocator-listHeader{
+    font-size: x-large;
+    margin-bottom: 20px;
+}
+
+.BikeLocator-stationListItem{
+    padding:5px 5px 10px 5px;
+    font-size: large;
+}

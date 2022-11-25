@@ -1,4 +1,8 @@
 .leaflet-container {
-    height: 500px;
-    width: 500px;
-  }
+  height: 500px;
+  width: 550px;
+}
+
+.BikeLocator-map {
+  margin: 8px;
+}
