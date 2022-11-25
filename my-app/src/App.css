@@ -45,19 +45,6 @@
 .BikeLocator-mapListContainer{
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: flex-start;
-  /* width: 75%; */
+  width: 75%;
 }
-
-
-
-/* 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */
