@@ -1,4 +1,5 @@
 import * as L from 'leaflet';
+import App from './App';
 
 function apiCall() {
     return new Promise<BikeNetworkType> ((resolve, reject) => {
@@ -17,24 +18,49 @@ function apiCall() {
 
 export async function getClosestLocations(currentLocation: {latitude: number, longitude: number}) {
     const {latitude, longitude} = currentLocation;
-    var result;
+    console.log('latitude: ', latitude);
+    console.log('longitude: ', longitude);
+    var result: BikeNetworkType | null = null;
     try{
         result = await apiCall();
 
     } catch(e){
         console.log(e);
+
+    } finally{
+        if (!result) return;
     }
+
     var fromLatLng = L.latLng(latitude, longitude);
+    var distances: { index: number, distance: number }[] = [];
+
     // eslint-disable-next-line
-    result?.stations.map((station) => {
+    result.stations.forEach((station) => {
 
         var toLatLng = L.latLng(station.latitude, station.longitude);
-        let distance = fromLatLng.distanceTo(toLatLng)/ 1000;
-        
-        //sort a list based on distance, hold onto the indexOf the smallest distances
-    })
-    //return a list of the stations indexes
-    return result 
+        distances.push({ index: result?.stations.indexOf(station) ?? 0, distance: fromLatLng.distanceTo(toLatLng)/ 1000});
+    });
+    
+    
+    distances.sort((a, b) => {
+        let dist1 = a.distance;
+        let dist2 = b.distance;
+
+        return dist1 < dist2 ? -1 : (dist1 > dist2 ? 1 : 0)
+    });
+
+    var closestStations: any = [];
+    // distances.forEach((distance) => {
+    //     closestStations.push(result?.stations[distance.index]);
+    // });
+
+    for(let i=0; i < 5; i++){
+        closestStations.push(result?.stations[distances[i].index]);
+    }
+
+    console.log('closestStations: ', closestStations);
+
+    return closestStations;
 }
 
 export interface BikeNetworkType {

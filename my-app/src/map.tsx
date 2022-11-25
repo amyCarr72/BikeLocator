@@ -41,19 +41,19 @@ export class Map extends React.Component<MapProps, MapState>{
     }
 
     drawPopups() {
-        const {closestList, currentLocation} =this.props;
-        const {latitude, longitude} = currentLocation
+        const {closestList} = this.props;
 
         return closestList.map((location, i) => {
-
+            // console.log('location: ', location.name);
+            // console.log('i: ', i);
             return (
-            <React.Fragment key={i}>
-                <Marker position={[latitude, longitude]}>
-                    <Popup>
-                        This is your current location.
-                    </Popup>
-                </Marker>
-            </React.Fragment>
+                <React.Fragment key={i}>
+                    <Marker position={[location.latitude, location.longitude]}>
+                        <Popup>
+                            {location.name}
+                        </Popup>
+                    </Marker>
+                </React.Fragment>
             )
         })
     }

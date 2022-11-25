@@ -50,12 +50,19 @@ export default class App extends React.Component <{}, AppState>{
 
     this.setState({
       currentLocation: {latitude, longitude}
-    });
-
-    console.log('currentLocation: ', this.state.currentLocation);
-
-    getClosestLocations(this.state.currentLocation);
+    }, () => this.setClosestStations());
 
   }
+  
+  async setClosestStations() {
+    
+    await getClosestLocations(this.state.currentLocation)
+    .then((closestStationsResult) => {
+      this.setState({
+      closestStations: closestStationsResult
+    })});
+
+  }
+
   
 }
