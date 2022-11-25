@@ -16,29 +16,29 @@ function apiCall() {
     })
 }
 
-export async function getClosestLocations(currentLocation: {latitude: number, longitude: number}) {
+export async function getClosestLocations(currentLocation: {latitude: number, longitude: number}, minBikeNum: number) {
     const {latitude, longitude} = currentLocation;
-    console.log('latitude: ', latitude);
-    console.log('longitude: ', longitude);
-    var result: BikeNetworkType | null = null;
+    var apiResult: BikeNetworkType | null = null;
     try{
-        result = await apiCall();
+        apiResult = await apiCall();
 
     } catch(e){
         console.log(e);
 
     } finally{
-        if (!result) return;
+        if (!apiResult) return;
     }
+
+    const stations = apiResult.stations.filter(function(station) { return station.free_bikes > minBikeNum});
 
     var fromLatLng = L.latLng(latitude, longitude);
     var distances: { index: number, distance: number }[] = [];
 
     // eslint-disable-next-line
-    result.stations.forEach((station) => {
+    stations.forEach((station) => {
 
         var toLatLng = L.latLng(station.latitude, station.longitude);
-        distances.push({ index: result?.stations.indexOf(station) ?? 0, distance: fromLatLng.distanceTo(toLatLng)/ 1000});
+        distances.push({ index: stations.indexOf(station) ?? 0, distance: fromLatLng.distanceTo(toLatLng)/ 1000});
     });
     
     
@@ -55,7 +55,7 @@ export async function getClosestLocations(currentLocation: {latitude: number, lo
     // });
 
     for(let i=0; i < 5; i++){
-        closestStations.push(result?.stations[distances[i].index]);
+        closestStations.push(stations[distances[i].index]);
     }
 
     console.log('closestStations: ', closestStations);

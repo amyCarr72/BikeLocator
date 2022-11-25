@@ -8,14 +8,15 @@ import { LocationInput } from './inputForm';
 interface AppState {
   currentLocation: {latitude :number, longitude: number},
   closestStations: NetworkStationType[]
+  minBikes: number
 }
 
 export default class App extends React.Component <{}, AppState>{
 
   state = {
     currentLocation: {latitude: 51.509865, longitude:-0.118092},
-    closestStations: []
-
+    closestStations: [],
+    minBikes: 1
   }
 
   render() {
@@ -31,7 +32,11 @@ export default class App extends React.Component <{}, AppState>{
               Longitude:
               <input type="text" name="longitude" />
             </label>
-            <input type="submit" value="Submit" />
+            <label>
+              Number of bikes required: 
+              <input type='number' name="freeBikes" />
+            </label>
+            <input className='locationSubmit' type="submit" value="Submit" />
         </form>
 
         <div className='BikeLocator-mapListContainer'>
@@ -47,16 +52,18 @@ export default class App extends React.Component <{}, AppState>{
 
     const latitude: number = parseFloat(event.target[0].value);
     const longitude: number = parseFloat(event.target[1].value);
+    const minBikes: number = parseInt(event.target[2].value)
 
     this.setState({
-      currentLocation: {latitude, longitude}
+      currentLocation: {latitude, longitude},
+      minBikes: minBikes
     }, () => this.setClosestStations());
 
   }
   
   async setClosestStations() {
     
-    await getClosestLocations(this.state.currentLocation)
+    await getClosestLocations(this.state.currentLocation, this.state.minBikes)
     .then((closestStationsResult) => {
       this.setState({
       closestStations: closestStationsResult
